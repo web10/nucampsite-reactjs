@@ -1,14 +1,20 @@
 import React, { Component }  from 'react';
-import { Nav, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Jumbotron } from 'reactstrap';
+import { Nav, NavbarToggler, Collapse, NavItem, Navbar, NavbarBrand, Jumbotron, 
+    Button, Modal, ModalHeader, ModalBody,
+    Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
     constructor(props){
         super(props);
-        this.toggleNav = this.toggleNav.bind(this);
         this.state = {
-            isNavOpen: false
+            isNavOpen: false,
+            isModalOpen: false
         };
+
+        this.toggleNav = this.toggleNav.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
     }
 
     toggleNav(){
@@ -16,6 +22,21 @@ class Header extends Component {
             isNavOpen: !this.state.isNavOpen
         })
     }
+
+    toggleModal(){
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        })
+    }
+
+    handleLogin(event) {
+        alert(`Username: ${this.username.value} 
+            Password: ${this.password.value} 
+            Remember: ${this.remember.checked}`);
+        this.toggleModal();
+        event.preventDefault();
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -34,7 +55,7 @@ class Header extends Component {
                     <div className="container">
                         <NavbarBrand className="mr-auto" href="/"><img src="/assets/images/logo.png" 
                             height="30" width="30" alt="NuCamp Logo"/></NavbarBrand>
-                        <NavbarToggler onClick={this.toggleNave} />
+                        <NavbarToggler onClick={this.toggleNav} />
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                                 <NavItem>
@@ -58,9 +79,41 @@ class Header extends Component {
                                     </NavLink>
                                 </NavItem>
                             </Nav>
+                            <span className="navbar-text ml-auto">
+                                <Button outline onClick={this.toggleModal}>
+                                   <i className="fa fa-sign-in fa-lg">Login</i>
+                                </Button>
+                            </span>
                         </Collapse>
                     </div>
                 </Navbar>
+
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+                    <ModalBody>
+                        <Form onSubmit={this.handleLogin}>
+                            <FormGroup>
+                                <Label htmFor="username">Username</Label>
+                                <Input type="text" id="username" name="username" 
+                                    innerRef={input => this.username = input} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmFor="password">Password</Label>
+                                <Input type="password" id="password" name="password" 
+                                    innerRef={input => this.password = input} />
+                            </FormGroup>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" name="remember" 
+                                        innerRef={input => this.remember = input} />
+                                    Remember me
+                                </Label>
+                            </FormGroup>
+                            <Button type="submit" value="submit" color="primary">Login</Button>
+                        </Form>
+
+                    </ModalBody>
+                </Modal>
             </React.Fragment>
         );
     }
