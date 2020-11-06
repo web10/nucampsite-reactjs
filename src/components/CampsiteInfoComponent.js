@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
-
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function RenderComments({comments}) {
     if(comments){
@@ -39,15 +39,13 @@ function RenderCampsite({campsite}) {
             )
 }
     
-        
-
 function CampsiteInfo(props) {
     if(props.campsite){
         return (
             <div className="container">
                 <div className="row">
                     <RenderCampsite campsite={props.campsite} />
-                    <RenderComments comments={props.campsite.comments} />
+                    <RenderComments comments={props.comments} />
                 </div>
             </div>
         )
@@ -56,8 +54,4 @@ function CampsiteInfo(props) {
     }
 }    
     
-        
-    
-
-
 export default CampsiteInfo;
