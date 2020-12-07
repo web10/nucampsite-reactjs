@@ -29,7 +29,7 @@ function Directory(props) {
     return (
         <div className="container">
             <div className="row">
-                <div classname="col">
+                <div className="col">
                     <Breadcrumb>
                         <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Directory</BreadcrumbItem>

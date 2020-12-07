@@ -6,12 +6,13 @@ import CampsiteInfo from './CampsiteInfoComponent';
 import Home from './HomeComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { CAMPSITES } from '../shared/campsites';
 import { COMMENTS } from '../shared/comments';
 import { PARTNERS } from '../shared/partners';
 import { PROMOTIONS } from '../shared/promotions';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 const mapStateToProps = state => {
   return{
